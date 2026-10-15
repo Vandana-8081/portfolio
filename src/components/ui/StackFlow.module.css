@@ -1,0 +1,258 @@
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(18px, 3vw, 28px);
+  box-shadow: var(--shadow);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.request {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.method {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--data-soft);
+  color: var(--data);
+}
+
+.method[data-method="POST"] {
+  background: var(--server-soft);
+  color: var(--server);
+}
+
+.path {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.send {
+  font-size: 0.875rem;
+}
+
+/* ───── The three layers ───── */
+.flow {
+  list-style: none;
+  display: flex;
+}
+
+.item {
+  display: flex;
+  align-items: stretch;
+  width: calc((100% - 96px) / 3 + 48px);
+}
+
+.item:last-child {
+  width: calc((100% - 96px) / 3);
+}
+
+.layer {
+  --layer-color: var(--client);
+  --layer-soft: var(--client-soft);
+  flex: 1;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.layer[data-layer="server"] {
+  --layer-color: var(--server);
+  --layer-soft: var(--server-soft);
+}
+
+.layer[data-layer="data"] {
+  --layer-color: var(--data);
+  --layer-soft: var(--data-soft);
+}
+
+.active {
+  border-color: var(--layer-color);
+  background: var(--layer-soft);
+  box-shadow: 0 0 0 4px var(--layer-soft);
+}
+
+.layerTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icons {
+  display: inline-flex;
+  gap: 6px;
+  font-size: 1.35rem;
+  color: var(--layer-color);
+}
+
+.layerName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.2;
+}
+
+.code {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+/* ───── Connectors + travelling packet ───── */
+.connector {
+  position: relative;
+  flex: 0 0 48px;
+}
+
+.track {
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 11px);
+}
+
+.packet {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation-timing-function: cubic-bezier(0.45, 0, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.forward {
+  background: var(--marigold);
+  box-shadow: 0 0 0 5px var(--server-soft);
+  animation-name: forwardX;
+}
+
+.back {
+  background: var(--data);
+  box-shadow: 0 0 0 5px var(--data-soft);
+  animation-name: backX;
+}
+
+@keyframes forwardX {
+  from {
+    left: 6px;
+  }
+  to {
+    left: calc(100% - 6px);
+  }
+}
+
+@keyframes backX {
+  from {
+    left: calc(100% - 6px);
+  }
+  to {
+    left: 6px;
+  }
+}
+
+/* ───── Response line ───── */
+.response {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  min-height: 1.6em;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.responseDone {
+  color: var(--data);
+}
+
+.responseDone strong {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+/* ───── Phone: layers stack vertically ───── */
+@media (max-width: 720px) {
+  .flow,
+  .item {
+    flex-direction: column;
+  }
+
+  .item,
+  .item:last-child {
+    width: 100%;
+  }
+
+  .connector {
+    flex-basis: 34px;
+  }
+
+  .track {
+    top: 6px;
+    bottom: 6px;
+    left: 50%;
+    right: auto;
+    width: 2px;
+    height: auto;
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(180deg, var(--line) 0 6px, transparent 6px 11px);
+  }
+
+  .packet {
+    left: 50%;
+  }
+
+  .forward {
+    animation-name: forwardY;
+  }
+
+  .back {
+    animation-name: backY;
+  }
+}
+
+@keyframes forwardY {
+  from {
+    top: 6px;
+  }
+  to {
+    top: calc(100% - 6px);
+  }
+}
+
+@keyframes backY {
+  from {
+    top: calc(100% - 6px);
+  }
+  to {
+    top: 6px;
+  }
+}

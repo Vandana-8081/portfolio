@@ -1,0 +1,119 @@
+.hero {
+  position: relative;
+  padding-top: clamp(104px, 12vw, 128px);
+  padding-bottom: clamp(64px, 9vw, 104px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Soft colour wash behind the hero, using the three layer colours */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto auto;
+  width: min(760px, 90vw);
+  height: 620px;
+  background:
+    radial-gradient(closest-side, var(--client-soft), transparent 70%) 0 0 / 70% 70% no-repeat,
+    radial-gradient(closest-side, var(--server-soft), transparent 70%) 100% 30% / 60% 60% no-repeat,
+    radial-gradient(closest-side, var(--data-soft), transparent 70%) 40% 100% / 60% 60% no-repeat;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-family: var(--font-hero-title, var(--font-display)), Georgia, serif;
+  font-size: clamp(2.8rem, 7vw, 5.25rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.role {
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.8vw, 2rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--muted);
+  min-height: 1.25em;
+}
+
+.role > span {
+  color: var(--text);
+}
+
+.intro {
+  margin-top: 22px;
+  max-width: 54ch;
+  font-size: 1.125rem;
+  color: var(--muted);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.socials {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin-top: 28px;
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--muted);
+  border-bottom: 1.5px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.socials a:hover {
+  color: var(--text);
+  border-bottom-color: var(--marigold);
+}
+
+.photo {
+  width: 100%;
+  max-width: 400px;
+  justify-self: end;
+}
+
+.flow {
+  margin-top: clamp(40px, 5vw, 56px);
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo {
+    order: -1;
+    max-width: 360px;
+    justify-self: center;
+  }
+}

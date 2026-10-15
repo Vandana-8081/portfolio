@@ -1,0 +1,90 @@
+.timeline {
+  list-style: none;
+  position: relative;
+  display: grid;
+  gap: clamp(28px, 4vw, 44px);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: clamp(20px, 4vw, 56px);
+}
+
+.meta {
+  padding-top: 6px;
+}
+
+.period {
+  font-weight: 600;
+}
+
+.place {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.body {
+  position: relative;
+  padding-left: 32px;
+  border-left: 2px solid var(--line);
+  padding-bottom: 4px;
+}
+
+/* Timeline dot */
+.body::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--server);
+}
+
+.item:first-child .body::before {
+  background: var(--server);
+}
+
+.role {
+  font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+  font-weight: 700;
+}
+
+.company {
+  margin-top: 4px;
+  color: var(--client);
+  font-weight: 600;
+}
+
+.points {
+  margin-top: 14px;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.points li::marker {
+  color: var(--server);
+}
+
+@media (max-width: 720px) {
+  .item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .meta {
+    display: flex;
+    gap: 10px;
+    padding-left: 34px;
+  }
+
+  .place::before {
+    content: "/ ";
+  }
+}

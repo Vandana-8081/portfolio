@@ -1,0 +1,51 @@
+.dot,
+.glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.dot[data-on="1"],
+.glow[data-on="1"] {
+  opacity: 1;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: #d8f1ff;
+  box-shadow: 0 0 6px rgba(216, 241, 255, 0.9);
+}
+
+/* Warm orange halo that trails the dot */
+.glow {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 122, 24, 0.5), rgba(255, 122, 24, 0.12) 60%, transparent);
+  mix-blend-mode: screen;
+}
+
+.glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  transition: transform 0.25s ease;
+}
+
+.glow[data-hover="1"]::after {
+  transform: scale(1.7);
+}
+
+.glow[data-press="1"]::after {
+  transform: scale(0.7);
+}

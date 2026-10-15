@@ -1,0 +1,282 @@
+/* ───────────── Design tokens ─────────────
+   Ink + cool paper, with three "stack layer" colours:
+   indigo = client (React), marigold = server (Node/Express), teal = data (MongoDB)
+*/
+:root {
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --surface-2: #eaedf5;
+  --text: #171a2f;
+  --muted: #565d79;
+  --line: #dde1ec;
+
+  --client: #3b3fb6;
+  --server: #c77a0e;
+  --data: #0b8577;
+  --tools: #6b5ca5;
+
+  --accent: var(--client);
+  --marigold: #f2a93b;
+  --on-marigold: #1b1606;
+
+  --client-soft: rgba(59, 63, 182, 0.1);
+  --server-soft: rgba(242, 169, 59, 0.16);
+  --data-soft: rgba(11, 133, 119, 0.12);
+  --tools-soft: rgba(107, 92, 165, 0.12);
+
+  --shadow: 0 1px 2px rgba(23, 26, 47, 0.06), 0 12px 32px -12px rgba(23, 26, 47, 0.18);
+  --nav-bg: rgba(243, 245, 249, 0.82);
+
+  --radius-lg: 24px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+
+  --container: 1160px;
+  --gutter: clamp(16px, 4vw, 40px);
+
+  --font-display: var(--font-bricolage, "Segoe UI"), "Segoe UI", system-ui, sans-serif;
+  --font-body: var(--font-dm-sans, "Segoe UI"), "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains, ui-monospace), ui-monospace, "Cascadia Code", monospace;
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #12152a;
+  --surface: #1a1e38;
+  --surface-2: #232847;
+  --text: #eceef8;
+  --muted: #a3a8c6;
+  --line: #2d3254;
+
+  --client: #9497ff;
+  --server: #f2a93b;
+  --data: #34c3b0;
+  --tools: #b6a8f0;
+
+  --client-soft: rgba(148, 151, 255, 0.14);
+  --server-soft: rgba(242, 169, 59, 0.14);
+  --data-soft: rgba(52, 195, 176, 0.14);
+  --tools-soft: rgba(182, 168, 240, 0.14);
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 18px 40px -18px rgba(0, 0, 0, 0.6);
+  --nav-bg: rgba(18, 21, 42, 0.8);
+
+  color-scheme: dark;
+}
+
+/* ───────────── Reset ───────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--marigold);
+  color: var(--on-marigold);
+}
+
+:focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ───────────── Layout helpers ───────────── */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(72px, 10vw, 128px);
+}
+
+.section-alt {
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  background: var(--marigold);
+  color: var(--on-marigold);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ───────────── Buttons ───────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.4rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  background: transparent;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--marigold);
+  color: var(--on-marigold);
+}
+
+.btn-primary:hover {
+  background: #f6b955;
+}
+
+.btn-outline {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.btn-outline:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.btn-sm {
+  min-height: 40px;
+  padding: 0 1rem;
+  font-size: 0.9375rem;
+}
+
+/* ───────────── Scroll reveal (see components/ui/Reveal.jsx) ───────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Custom cursor (see components/ui/CustomCursor.jsx) */
+.has-custom-cursor,
+.has-custom-cursor a,
+.has-custom-cursor button,
+.has-custom-cursor label {
+  cursor: none;
+}
+
+.has-custom-cursor input,
+.has-custom-cursor textarea {
+  cursor: text;
+}
+
+/* Mobile: body text justified (last line stays left-aligned) */
+@media (max-width: 860px) {
+  main p,
+  main li {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+}

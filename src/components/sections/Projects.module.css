@@ -1,0 +1,16 @@
+.list {
+  display: grid;
+  gap: clamp(32px, 6vw, 72px);
+}
+
+/* Stacking cards: each one sticks a little lower than the previous */
+.item {
+  position: sticky;
+  top: calc(92px + var(--i, 0) * 18px);
+}
+
+@media (max-width: 860px) {
+  .item {
+    position: static;
+  }
+}

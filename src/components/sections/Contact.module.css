@@ -1,0 +1,146 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(36px, 6vw, 80px);
+  align-items: start;
+}
+
+.cards {
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.cards > li {
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--marigold);
+  box-shadow: var(--shadow);
+}
+
+.icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: var(--marigold);
+  background: var(--surface-2);
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .icon {
+  background: var(--marigold);
+  color: var(--on-marigold);
+  transform: scale(1.08) rotate(-8deg);
+}
+
+.cardText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.08rem;
+  overflow-wrap: anywhere;
+}
+
+.go {
+  margin-left: auto;
+  flex: none;
+  color: var(--muted);
+  opacity: 0;
+  transform: translate(-6px, 6px);
+  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+}
+
+.card:hover .go {
+  opacity: 1;
+  transform: none;
+  color: var(--marigold);
+}
+
+.socials {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.socials a {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.socials a:hover {
+  color: var(--marigold);
+  border-color: var(--marigold);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .icon,
+  .go,
+  .socials a {
+    transition: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 14px 14px;
+    gap: 12px;
+  }
+
+  .icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .value {
+    font-size: 0.95rem;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+}

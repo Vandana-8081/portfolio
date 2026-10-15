@@ -1,0 +1,116 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: center;
+}
+
+.text {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 62ch;
+  font-size: 1.125rem;
+  color: var(--muted);
+}
+
+.text p:first-child {
+  color: var(--text);
+  padding-left: 18px;
+  border-left: 3px solid var(--marigold);
+}
+
+.facts {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.fact {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Accent bar that grows on hover */
+.fact::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(var(--marigold), var(--client));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.35s ease;
+}
+
+.fact:hover {
+  transform: translateX(8px);
+  border-color: var(--marigold);
+  box-shadow: var(--shadow);
+}
+
+.fact:hover::before {
+  transform: scaleY(1);
+}
+
+.icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  color: var(--marigold);
+  background: var(--server-soft);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.fact:hover .icon {
+  transform: rotate(-8deg) scale(1.1);
+  background: var(--marigold);
+  color: var(--on-marigold);
+}
+
+.fact dl {
+  margin: 0;
+}
+
+.fact dt {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.fact dd {
+  margin: 2px 0 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fact:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fact,
+  .fact::before,
+  .icon {
+    transition: none;
+  }
+}
